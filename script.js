@@ -1,5 +1,6 @@
-document.getElementById("generate").addEventListener("click", () => {
-  // Obtener los datos
+document.getElementById("form-cv").addEventListener("submit", function (e) {
+  e.preventDefault();
+
   const nombre = document.getElementById("nombre").value;
   const correo = document.getElementById("correo").value;
   const profesion = document.getElementById("profesion").value;
@@ -8,31 +9,50 @@ document.getElementById("generate").addEventListener("click", () => {
   const educacion = document.getElementById("educacion").value;
   const linkedin = document.getElementById("linkedin").value;
 
-  // Rellenar plantilla
-  document.getElementById("cv-nombre").textContent = nombre;
-  document.getElementById("cv-correo").textContent = correo;
-  document.getElementById("cv-profesion").textContent = profesion;
-  document.getElementById("cv-perfil").textContent = perfil;
-  document.getElementById("cv-experiencia").textContent = experiencia;
-  document.getElementById("cv-educacion").textContent = educacion;
-  document.getElementById("cv-linkedin").innerHTML = linkedin
-    ? `<strong>LinkedIn:</strong> <a href="${linkedin}" target="_blank">${linkedin}</a>`
-    : "";
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
 
-  const cv = document.getElementById("cv-preview");
-  cv.style.display = "block";
+  let y = 20;
 
-  const opt = {
-    margin: 0.5,
-    filename: 'mi_curriculum.pdf',
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+  doc.setFontSize(16);
+  doc.text(`Nombre: ${nombre}`, 20, y); y += 10;
+  doc.text(`Correo: ${correo}`, 20, y); y += 10;
+  doc.text(`Profesión: ${profesion}`, 20, y); y += 10;
+  doc.setFontSize(14);
+  doc.text("Resumen Profesional:", 20, y); y += 8;
+  doc.setFontSize(12);
+  y = addMultilineText(doc, perfil, y);
+
+  doc.setFontSize(14);
+  doc.text("Experiencia Laboral:", 20, y); y += 8;
+  doc.setFontSize(12);
+  y = addMultilineText(doc, experiencia, y);
+
+  doc.setFontSize(14);
+  doc.text("Educación:", 20, y); y += 8;
+  doc.setFontSize(12);
+  y = addMultilineText(doc, educacion, y);
+
+  doc.setFontSize(14);
+  doc.text("LinkedIn:", 20, y); y += 8;
+  doc.setFontSize(12);
+  doc.text(linkedin, 20, y); y += 10;
+
+  // Cargar imagen marca de agua
+  const img = new Image();
+  img.src = "img/watermark.png";
+  img.onload = function () {
+    doc.addImage(img, "PNG", 45, 130, 120, 120, "", "FAST");
+    doc.save("curriculum_con_marca_de_agua.pdf");
   };
-
-  html2pdf().set(opt).from(cv).save();
-
-  setTimeout(() => {
-    cv.style.display = "none";
-  }, 2000);
+  img.onerror = function () {
+    alert("No se pudo cargar la imagen de la marca de agua.");
+  };
 });
+
+// Función para texto multilínea y control de salto vertical
+function addMultilineText(doc, text, startY) {
+  const lines = doc.splitTextToSize(text, 170);
+  doc.text(lines, 20, startY);
+  return startY + lines.length * 7;
+}

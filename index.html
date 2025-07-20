@@ -2,55 +2,38 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Generador de CV</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Generador de Currículums PDF</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="contenedor">
-    <h1>Generador de CV Profesional</h1>
+    <h1>Generador de Currículums</h1>
+
     <form id="form-cv">
-      <input type="text" id="nombre" placeholder="Nombre completo" required />
-      <input type="email" id="correo" placeholder="Correo electrónico" required />
-      <input type="text" id="profesion" placeholder="Profesión" required />
+      <input type="text" id="nombre" placeholder="Nombre completo" required>
+      <input type="email" id="correo" placeholder="Correo electrónico" required>
+      <input type="text" id="profesion" placeholder="Profesión" required>
       <textarea id="perfil" placeholder="Resumen profesional" required></textarea>
-      <textarea id="experiencia" placeholder="Experiencia laboral (máx. 3 líneas)" required></textarea>
-      <textarea id="educacion" placeholder="Educación (máx. 3 líneas)" required></textarea>
-      <input type="url" id="linkedin" placeholder="Enlace a LinkedIn (opcional)" />
-      <button type="button" id="generate">Generar CV PDF</button>
+      <textarea id="experiencia" placeholder="Experiencia laboral" required></textarea>
+      <textarea id="educacion" placeholder="Educación" required></textarea>
+      <input type="url" id="linkedin" placeholder="Enlace de LinkedIn" required>
+      <button type="submit">Generar CV PDF</button>
     </form>
 
-    <!-- Vista previa del CV -->
-    <div id="cv-preview" style="display: none;">
-      <div class="cv-container">
-        <h2 id="cv-nombre"></h2>
-        <p><strong>Correo:</strong> <span id="cv-correo"></span></p>
-        <p><strong>Profesión:</strong> <span id="cv-profesion"></span></p>
-        <hr />
-        <p><strong>Perfil:</strong></p>
-        <p id="cv-perfil"></p>
-        <p><strong>Experiencia:</strong></p>
-        <p id="cv-experiencia"></p>
-        <p><strong>Educación:</strong></p>
-        <p id="cv-educacion"></p>
-        <p id="cv-linkedin"></p>
-        <div class="marca-agua">CV GENERADOR</div>
-      </div>
-    </div>
-
-    <!-- Sección de pago -->
     <div class="seccion-premium">
-      <h2>Versión sin marca de agua</h2>
-      <a href="https://wa.me/573136521860" target="_blank">
-        <button class="btn-wsp">Solicitar por WhatsApp</button>
+      <h2>¿Quieres tu currículum sin marca de agua?</h2>
+      <a href="https://wa.me/573136521860?text=Hola,%20quiero%20mi%20currículum%20sin%20marca%20de%20agua" target="_blank">
+        <button class="btn-wsp">Solicitar vía WhatsApp</button>
       </a>
-      <a href="https://paypal.me/JohnJa1989/3" target="_blank">
-        <button class="btn-pago">Pagar con PayPal ($3 USD)</button>
+      <a href="https://www.paypal.me/JohnJa1989/3?note=Quiero%20mi%20CV%20sin%20marca%20de%20agua" target="_blank">
+        <button class="btn-pago">Pagar con PayPal $3 USD</button>
       </a>
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <!-- Librería jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
