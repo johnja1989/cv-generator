@@ -16,13 +16,22 @@
       <input type="email" id="correo" placeholder="Correo electrónico" required>
       <input type="text" id="profesion" placeholder="Profesión" required>
       <textarea id="perfil" placeholder="Resumen profesional" required></textarea>
-      <button type="submit">Generar CV PDF</button>
+      <button type="button" id="generate">Generar CV PDF</button>
     </form>
+
+    <!-- Vista previa oculta del CV -->
+    <div id="cv-preview" style="display:none; padding: 20px; font-family: Arial;">
+      <h2 id="cv-nombre"></h2>
+      <p><strong>Correo:</strong> <span id="cv-correo"></span></p>
+      <p><strong>Profesión:</strong> <span id="cv-profesion"></span></p>
+      <p><strong>Perfil:</strong></p>
+      <p id="cv-perfil"></p>
+    </div>
 
     <!-- Sección para botones premium -->
     <div class="seccion-premium">
       <h2>¿Quieres tu currículum sin marca de agua?</h2>
-      
+
       <!-- Opción WhatsApp -->
       <a href="https://wa.me/573136521860?text=Hola,%20quiero%20mi%20currículum%20sin%20marca%20de%20agua" target="_blank">
         <button class="btn-wsp">Solicitar vía WhatsApp</button>
@@ -35,6 +44,8 @@
     </div>
   </div>
 
+  <!-- Librería para generar PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

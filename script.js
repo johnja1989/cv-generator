@@ -1,24 +1,33 @@
-document.getElementById("cv-form").addEventListener("submit", function (e) {
-  e.preventDefault();
+document.getElementById("generate").addEventListener("click", () => {
+  // Obtener los valores del formulario
+  const nombre = document.getElementById("nombre").value;
+  const correo = document.getElementById("correo").value;
+  const profesion = document.getElementById("profesion").value;
+  const perfil = document.getElementById("perfil").value;
 
-  const name = document.getElementById("name").value;
-  const profession = document.getElementById("profession").value;
-  const about = document.getElementById("about").value;
+  // Insertar los valores en la vista previa
+  document.getElementById("cv-nombre").textContent = nombre;
+  document.getElementById("cv-correo").textContent = correo;
+  document.getElementById("cv-profesion").textContent = profesion;
+  document.getElementById("cv-perfil").textContent = perfil;
 
-  const doc = new jsPDF();
-  doc.setFontSize(20);
-  doc.text(name, 20, 30);
-  doc.setFontSize(16);
-  doc.text(profession, 20, 50);
-  doc.setFontSize(12);
-  doc.text("Sobre mí:", 20, 70);
-  doc.text(about, 20, 80);
+  // Mostrar la vista previa (por si estaba oculta)
+  const cv = document.getElementById("cv-preview");
+  cv.style.display = "block";
 
-  // Marca de agua
-  const img = new Image();
-  img.src = "watermark.png";
-  img.onload = function () {
-    doc.addImage(img, "PNG", 50, 130, 100, 40);
-    doc.save(`${name}_CV.pdf`);
+  // Configurar y generar el PDF
+  const opt = {
+    margin: 0.5,
+    filename: 'mi_curriculum.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
   };
+
+  html2pdf().set(opt).from(cv).save();
+
+  // Ocultar la vista previa después de generar el PDF
+  setTimeout(() => {
+    cv.style.display = "none";
+  }, 2000);
 });
