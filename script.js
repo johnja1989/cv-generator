@@ -1,21 +1,27 @@
 document.getElementById("generate").addEventListener("click", () => {
-  // Obtener los valores del formulario
+  // Obtener los datos
   const nombre = document.getElementById("nombre").value;
   const correo = document.getElementById("correo").value;
   const profesion = document.getElementById("profesion").value;
   const perfil = document.getElementById("perfil").value;
+  const experiencia = document.getElementById("experiencia").value;
+  const educacion = document.getElementById("educacion").value;
+  const linkedin = document.getElementById("linkedin").value;
 
-  // Insertar los valores en la vista previa
+  // Rellenar plantilla
   document.getElementById("cv-nombre").textContent = nombre;
   document.getElementById("cv-correo").textContent = correo;
   document.getElementById("cv-profesion").textContent = profesion;
   document.getElementById("cv-perfil").textContent = perfil;
+  document.getElementById("cv-experiencia").textContent = experiencia;
+  document.getElementById("cv-educacion").textContent = educacion;
+  document.getElementById("cv-linkedin").innerHTML = linkedin
+    ? `<strong>LinkedIn:</strong> <a href="${linkedin}" target="_blank">${linkedin}</a>`
+    : "";
 
-  // Mostrar la vista previa (por si estaba oculta)
   const cv = document.getElementById("cv-preview");
   cv.style.display = "block";
 
-  // Configurar y generar el PDF
   const opt = {
     margin: 0.5,
     filename: 'mi_curriculum.pdf',
@@ -26,7 +32,6 @@ document.getElementById("generate").addEventListener("click", () => {
 
   html2pdf().set(opt).from(cv).save();
 
-  // Ocultar la vista previa después de generar el PDF
   setTimeout(() => {
     cv.style.display = "none";
   }, 2000);

@@ -1,48 +1,73 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f5f7fa;
   text-align: center;
+  padding: 30px;
 }
 
 .contenedor {
-  background-color: white;
-  padding: 30px;
-  max-width: 600px;
+  background-color: #fff;
+  max-width: 700px;
   margin: auto;
+  padding: 25px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 form input,
 form textarea {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   margin: 10px 0;
-  border-radius: 5px;
   border: 1px solid #ccc;
+  border-radius: 6px;
 }
 
 button {
   background-color: #007bff;
   color: white;
-  padding: 10px 20px;
-  margin-top: 15px;
   border: none;
-  border-radius: 5px;
+  padding: 12px 20px;
+  margin-top: 15px;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 16px;
 }
 
 button:hover {
   background-color: #0056b3;
 }
 
+.cv-container {
+  padding: 25px;
+  background-color: white;
+  font-family: Arial;
+  position: relative;
+}
+
+.marca-agua {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  opacity: 0.1;
+  font-size: 24px;
+  color: gray;
+  transform: rotate(-30deg);
+}
+
+a {
+  text-decoration: none;
+}
+
 .btn-wsp {
-  background-color: #25D366;
+  background-color: #25d366;
+  margin-top: 20px;
 }
 
 .btn-pago {
-  background-color: #ffc107;
+  background-color: #ffcc00;
+  color: #333;
+  margin-top: 10px;
 }
 
 .seccion-premium {
