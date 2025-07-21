@@ -1,63 +1,62 @@
-document.getElementById("form-cv").addEventListener("submit", async function (e) {
+document.getElementById('form-cv').addEventListener('submit', function (e) {
   e.preventDefault();
 
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
 
-  const nombre = document.getElementById("nombre").value;
-  const correo = document.getElementById("correo").value;
-  const profesion = document.getElementById("profesion").value;
-  const perfil = document.getElementById("perfil").value;
-  const experiencia = document.getElementById("experiencia").value;
-  const educacion = document.getElementById("educacion").value;
-  const linkedin = document.getElementById("linkedin").value;
+  const nombre = document.getElementById('nombre').value;
+  const correo = document.getElementById('correo').value;
+  const profesion = document.getElementById('profesion').value;
+  const perfil = document.getElementById('perfil').value;
+  const experiencia = document.getElementById('experiencia').value;
+  const educacion = document.getElementById('educacion').value;
+  const linkedin = document.getElementById('linkedin').value;
 
-  doc.setFontSize(16);
-  doc.text("Currículum Vitae", 20, 20);
+  const texto = `
+Nombre: ${nombre}
+Correo: ${correo}
+Profesión: ${profesion}
+
+Resumen Profesional:
+${perfil}
+
+Experiencia Laboral:
+${experiencia}
+
+Educación:
+${educacion}
+
+LinkedIn: ${linkedin}
+`;
+
+  const lineas = doc.splitTextToSize(texto, 180);
+  let y = 20;
   doc.setFontSize(12);
-  doc.text(`Nombre: ${nombre}`, 20, 35);
-  doc.text(`Correo: ${correo}`, 20, 45);
-  doc.text(`Profesión: ${profesion}`, 20, 55);
-  doc.text("Resumen Profesional:", 20, 65);
-  doc.text(doc.splitTextToSize(perfil, 170), 20, 73);
+  lineas.forEach(linea => {
+    if (y > 270) {
+      doc.addPage();
+      y = 20;
+    }
+    doc.text(linea, 15, y);
+    y += 7;
+  });
 
-  let y = 73 + doc.getTextDimensions(doc.splitTextToSize(perfil, 170)).h + 10;
-  doc.text("Experiencia Laboral:", 20, y);
-  y += 8;
-  doc.text(doc.splitTextToSize(experiencia, 170), 20, y);
-  y += doc.getTextDimensions(doc.splitTextToSize(experiencia, 170)).h + 5;
-
-  doc.text("Educación:", 20, y);
-  y += 8;
-  doc.text(doc.splitTextToSize(educacion, 170), 20, y);
-  y += doc.getTextDimensions(doc.splitTextToSize(educacion, 170)).h + 5;
-
-  doc.text(`LinkedIn: ${linkedin}`, 20, y + 10);
-
-  // APLICAR MARCA DE AGUA REPETIDA EN TODAS LAS PÁGINAS
-  const totalPages = doc.internal.getNumberOfPages();
-  const width = doc.internal.pageSize.getWidth();
-  const height = doc.internal.pageSize.getHeight();
-
-  for (let i = 1; i <= totalPages; i++) {
-    doc.setPage(i);
-    doc.saveGraphicsState();
-    doc.setGState(new doc.GState({ opacity: 0.06 }));
-    doc.setFontSize(22);
-    doc.setTextColor(150);
-    doc.setFont("helvetica", "bold");
-
-    // Repetir patrón diagonal
-    for (let x = -50; x < width + 100; x += 80) {
-      for (let y = -50; y < height + 100; y += 60) {
-        doc.text("Made with CV-GENERATOR", x, y, {
-          angle: 45
-        });
+  const img = new Image();
+  img.src = 'img/watermark.png';
+  img.onload = () => {
+    const totalPages = doc.getNumberOfPages();
+    for (let i = 1; i <= totalPages; i++) {
+      doc.setPage(i);
+      for (let x = -50; x < 250; x += 100) {
+        for (let y = -50; y < 350; y += 100) {
+          doc.saveGraphicsState();
+          doc.setGState(new doc.GState({ opacity: 0.1 }));
+          doc.addImage(img, 'PNG', x, y, 100, 100, undefined, 'FAST', 45);
+          doc.restoreGraphicsState();
+        }
       }
     }
 
-    doc.restoreGraphicsState();
-  }
-
-  doc.save(`${nombre.replace(/\s+/g, "_")}_CV.pdf`);
+    doc.save(`${nombre.replace(/ /g, '_')}_CV.pdf`);
+  };
 });
