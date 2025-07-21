@@ -4,7 +4,7 @@ Genera currículums en PDF gratis con marca de agua o paga para obtener uno prof
 
 ## 🚀 Cómo usar
 1. Llena el formulario.
-2. Haz clic en "Generar PDF".
+2. Haz clic en "Generar CV PDF".
 3. Para versiones premium, contáctame por WhatsApp.
 
 ## 💳 Métodos de pago
