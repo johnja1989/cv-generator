@@ -72,6 +72,12 @@ button[type="submit"] {
   justify-content: center;
 }
 
+.icon-paypal {
+  height: 20px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
 .icon-nequi {
   height: 20px;
   margin-right: 8px;
