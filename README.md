@@ -9,7 +9,7 @@ Genera currículums en PDF gratis con marca de agua o paga para obtener uno prof
 
 ## 💳 Métodos de pago
 - Nequi (3136521860)
-- PayPal: https://paypal.me/tuusuario
+- PayPal: https://www.paypal.me/JohnJa1989
 
 ## 📦 Estructura
 - index.html
