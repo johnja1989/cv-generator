@@ -59,6 +59,12 @@ button[type="submit"] {
   color: white;
 }
 
+.icon-wsp {
+  height: 20px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
 .btn-pago {
   background-color: #0070ba;
   color: white;
