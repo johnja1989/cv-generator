@@ -2,25 +2,27 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Generador de Currículums PDF</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="contenedor">
     <h1>Generador de Currículums</h1>
 
+    <!-- Formulario para datos -->
     <form id="form-cv">
-      <input type="text" id="nombre" placeholder="Nombre completo" required>
-      <input type="email" id="correo" placeholder="Correo electrónico" required>
-      <input type="text" id="profesion" placeholder="Profesión" required>
+      <input type="text" id="nombre" placeholder="Nombre completo" required />
+      <input type="email" id="correo" placeholder="Correo electrónico" required />
+      <input type="text" id="profesion" placeholder="Profesión" required />
       <textarea id="perfil" placeholder="Resumen profesional" required></textarea>
       <textarea id="experiencia" placeholder="Experiencia laboral" required></textarea>
       <textarea id="educacion" placeholder="Educación" required></textarea>
-      <input type="url" id="linkedin" placeholder="Enlace de LinkedIn" required>
+      <input type="text" id="linkedin" placeholder="Enlace de LinkedIn" required />
       <button type="submit">Generar CV PDF</button>
     </form>
 
+    <!-- Sección premium -->
     <div class="seccion-premium">
       <h2>¿Quieres tu currículum sin marca de agua?</h2>
       <a href="https://wa.me/573136521860?text=Hola,%20quiero%20mi%20currículum%20sin%20marca%20de%20agua" target="_blank">
