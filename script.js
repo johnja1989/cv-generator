@@ -1,5 +1,8 @@
-document.getElementById("form-cv").addEventListener("submit", function (e) {
+document.getElementById("form-cv").addEventListener("submit", async function (e) {
   e.preventDefault();
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
 
   const nombre = document.getElementById("nombre").value;
   const correo = document.getElementById("correo").value;
@@ -8,45 +11,39 @@ document.getElementById("form-cv").addEventListener("submit", function (e) {
   const experiencia = document.getElementById("experiencia").value;
   const educacion = document.getElementById("educacion").value;
   const linkedin = document.getElementById("linkedin").value;
+  const codigo = document.getElementById("codigoAcceso").value.trim();
 
-  const contenido = document.createElement("div");
-  contenido.style.padding = "30px";
-  contenido.innerHTML = `
-    <h1>${nombre}</h1>
-    <p><strong>Correo:</strong> ${correo}</p>
-    <p><strong>Profesión:</strong> ${profesion}</p>
-    <h2>Resumen Profesional</h2>
-    <p>${perfil}</p>
-    <h2>Experiencia Laboral</h2>
-    <p>${experiencia}</p>
-    <h2>Educación</h2>
-    <p>${educacion}</p>
-    <p><strong>LinkedIn:</strong> <a href="${linkedin}" target="_blank">${linkedin}</a></p>
-  `;
+  const esPremium = codigo === "CVVIP2025"; // Código de acceso
 
-  // Marca de agua diagonal
-  const watermarkCanvas = document.createElement("canvas");
-  watermarkCanvas.width = 400;
-  watermarkCanvas.height = 400;
-  const ctx = watermarkCanvas.getContext("2d");
-  ctx.translate(watermarkCanvas.width / 2, watermarkCanvas.height / 2);
-  ctx.rotate(-Math.PI / 4);
-  ctx.font = "30px Arial";
-  ctx.fillStyle = "rgba(150, 150, 150, 0.2)";
-  ctx.textAlign = "center";
-  ctx.fillText("CV GENERADO GRATIS", 0, 0);
-  const watermarkDataURL = watermarkCanvas.toDataURL("image/png");
+  // Marca de agua si no es premium
+  if (!esPremium) {
+    doc.setTextColor(180);
+    doc.setFontSize(40);
+    doc.text("Generado por CV-GENERATOR", 105, 150, {
+      angle: 45,
+      align: 'center',
+    });
+  }
 
-  contenido.style.backgroundImage = `url(${watermarkDataURL})`;
-  contenido.style.backgroundRepeat = "repeat";
+  doc.setFontSize(12);
+  doc.setTextColor(0);
+  let y = 30;
+  doc.text(`Nombre: ${nombre}`, 20, y); y += 10;
+  doc.text(`Correo: ${correo}`, 20, y); y += 10;
+  doc.text(`Profesión: ${profesion}`, 20, y); y += 10;
+  doc.text("Resumen Profesional:", 20, y); y += 10;
+  const perfilLines = doc.splitTextToSize(perfil, 160);
+  doc.text(perfilLines, 20, y); y += perfilLines.length * 10;
 
-  const opciones = {
-    margin: 0,
-    filename: "cv_generado.pdf",
-    image: { type: "jpeg", quality: 0.98 },
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-  };
+  doc.text("Experiencia Laboral:", 20, y); y += 10;
+  const expLines = doc.splitTextToSize(experiencia, 160);
+  doc.text(expLines, 20, y); y += expLines.length * 10;
 
-  html2pdf().set(opciones).from(contenido).save();
+  doc.text("Educación:", 20, y); y += 10;
+  const eduLines = doc.splitTextToSize(educacion, 160);
+  doc.text(eduLines, 20, y); y += eduLines.length * 10;
+
+  doc.text(`LinkedIn: ${linkedin}`, 20, y);
+
+  doc.save("mi_curriculum.pdf");
 });
