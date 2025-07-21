@@ -18,7 +18,7 @@
       <textarea id="perfil" placeholder="Resumen profesional" required></textarea>
       <textarea id="experiencia" placeholder="Experiencia laboral" required></textarea>
       <textarea id="educacion" placeholder="Educación" required></textarea>
-      <input type="url" id="linkedin" placeholder="Enlace de LinkedIn">
+      <input type="url" id="linkedin" placeholder="Enlace de LinkedIn" required>
       <button type="submit">Generar CV PDF</button>
     </form>
 
@@ -38,15 +38,17 @@
 
       <!-- Opción Nequi -->
       <div class="nequi-pago">
-        <p>¿Prefieres pagar con Nequi?</p>
-        <p><strong>Número:</strong> 313 6521860</p>
-        <a href="https://wa.me/573136521860?text=Hola,%20ya%20realicé%20el%20pago%20por%20Nequi%20y%20quiero%20mi%20CV%20sin%20marca%20de%20agua" target="_blank">
-          <button class="btn-nequi">Confirmar Pago vía WhatsApp</button>
-        </a>
+        <button class="btn-nequi">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Nequi_logo.svg/512px-Nequi_logo.svg.png" alt="Nequi" class="icon-nequi">
+          Pagar con Nequi
+        </button>
+        <p>Número: <strong>3136521860</strong></p>
+        <img src="img/nequi-qr.png" alt="QR Nequi" class="qr-nequi">
       </div>
     </div>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

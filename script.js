@@ -1,62 +1,55 @@
-document.getElementById('form-cv').addEventListener('submit', function (e) {
+document.getElementById("form-cv").addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
+  // Obtener valores de los campos
+  const nombre = document.getElementById("nombre").value;
+  const correo = document.getElementById("correo").value;
+  const profesion = document.getElementById("profesion").value;
+  const perfil = document.getElementById("perfil").value;
+  const experiencia = document.getElementById("experiencia").value;
+  const educacion = document.getElementById("educacion").value;
+  const linkedin = document.getElementById("linkedin").value;
 
-  const nombre = document.getElementById('nombre').value;
-  const correo = document.getElementById('correo').value;
-  const profesion = document.getElementById('profesion').value;
-  const perfil = document.getElementById('perfil').value;
-  const experiencia = document.getElementById('experiencia').value;
-  const educacion = document.getElementById('educacion').value;
-  const linkedin = document.getElementById('linkedin').value;
+  // Crear contenedor HTML para el currículum
+  const contenido = document.createElement("div");
+  contenido.style.padding = "30px";
+  contenido.innerHTML = `
+    <h1>${nombre}</h1>
+    <p><strong>Correo:</strong> ${correo}</p>
+    <p><strong>Profesión:</strong> ${profesion}</p>
+    <h2>Resumen Profesional</h2>
+    <p>${perfil}</p>
+    <h2>Experiencia Laboral</h2>
+    <p>${experiencia}</p>
+    <h2>Educación</h2>
+    <p>${educacion}</p>
+    <p><strong>LinkedIn:</strong> <a href="${linkedin}" target="_blank">${linkedin}</a></p>
+  `;
 
-  const texto = `
-Nombre: ${nombre}
-Correo: ${correo}
-Profesión: ${profesion}
+  // Crear marca de agua diagonal
+  const watermarkCanvas = document.createElement("canvas");
+  watermarkCanvas.width = 400;
+  watermarkCanvas.height = 400;
+  const ctx = watermarkCanvas.getContext("2d");
+  ctx.translate(watermarkCanvas.width / 2, watermarkCanvas.height / 2);
+  ctx.rotate(-Math.PI / 4); // rotar 45 grados en sentido antihorario
+  ctx.font = "30px Arial";
+  ctx.fillStyle = "rgba(150, 150, 150, 0.2)";
+  ctx.textAlign = "center";
+  ctx.fillText("CV GENERADO GRATIS", 0, 0);
 
-Resumen Profesional:
-${perfil}
+  const watermarkDataURL = watermarkCanvas.toDataURL("image/png");
+  contenido.style.backgroundImage = `url(${watermarkDataURL})`;
+  contenido.style.backgroundRepeat = "repeat";
 
-Experiencia Laboral:
-${experiencia}
-
-Educación:
-${educacion}
-
-LinkedIn: ${linkedin}
-`;
-
-  const lineas = doc.splitTextToSize(texto, 180);
-  let y = 20;
-  doc.setFontSize(12);
-  lineas.forEach(linea => {
-    if (y > 270) {
-      doc.addPage();
-      y = 20;
-    }
-    doc.text(linea, 15, y);
-    y += 7;
-  });
-
-  const img = new Image();
-  img.src = 'img/watermark.png';
-  img.onload = () => {
-    const totalPages = doc.getNumberOfPages();
-    for (let i = 1; i <= totalPages; i++) {
-      doc.setPage(i);
-      for (let x = -50; x < 250; x += 100) {
-        for (let y = -50; y < 350; y += 100) {
-          doc.saveGraphicsState();
-          doc.setGState(new doc.GState({ opacity: 0.1 }));
-          doc.addImage(img, 'PNG', x, y, 100, 100, undefined, 'FAST', 45);
-          doc.restoreGraphicsState();
-        }
-      }
-    }
-
-    doc.save(`${nombre.replace(/ /g, '_')}_CV.pdf`);
+  // Configurar y generar PDF
+  const opciones = {
+    margin: 0,
+    filename: "cv_generado.pdf",
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
   };
+
+  html2pdf().set(opciones).from(contenido).save();
 });
