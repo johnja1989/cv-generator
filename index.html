@@ -1,50 +1,42 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Generador de Currículums PDF</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="contenedor">
     <h1>Generador de Currículums</h1>
 
-    <!-- Formulario para datos -->
     <form id="form-cv">
-      <input type="text" id="nombre" placeholder="Nombre completo" required>
-      <input type="email" id="correo" placeholder="Correo electrónico" required>
-      <input type="text" id="profesion" placeholder="Profesión" required>
+      <input type="text" id="nombre" placeholder="Nombre completo" required />
+      <input type="email" id="correo" placeholder="Correo electrónico" required />
+      <input type="text" id="profesion" placeholder="Profesión" required />
       <textarea id="perfil" placeholder="Resumen profesional" required></textarea>
       <textarea id="experiencia" placeholder="Experiencia laboral" required></textarea>
       <textarea id="educacion" placeholder="Educación" required></textarea>
-      <input type="url" id="linkedin" placeholder="Enlace de LinkedIn" required>
-      <button type="submit">Generar CV PDF</button>
+      <input type="url" id="linkedin" placeholder="Enlace de LinkedIn" required />
+      <button type="submit">Generar CV PDF (Gratis)</button>
     </form>
 
-    <!-- Sección para botones premium -->
     <div class="seccion-premium">
       <h2>¿Quieres tu currículum sin marca de agua?</h2>
 
-      <!-- Opción WhatsApp -->
       <a href="https://wa.me/573136521860?text=Hola,%20quiero%20mi%20currículum%20sin%20marca%20de%20agua" target="_blank">
-        <button class="btn-wsp"><img src="img/whatsapp.svg" alt="WhatsApp" class="icon-wsp">Solicitar vía WhatsApp</button>
+        <button class="btn-wsp">Solicitar vía WhatsApp</button>
       </a>
 
-      <!-- Opción PayPal -->
       <a href="https://www.paypal.me/JohnJa1989/3?note=Quiero%20mi%20CV%20sin%20marca%20de%20agua" target="_blank">
-        <button class="btn-pago"><img src="img/paypal-3.svg" alt="Paypal" class="icon-paypal">Pagar con PayPal $3 USD</button>
+        <button class="btn-pago">Pagar con PayPal $3 USD</button>
       </a>
 
-      <!-- Opción Nequi -->
-      <div class="nequi-pago">
-        <button class="btn-nequi">
-          <img src="img/nequi-2.svg" alt="Nequi" class="icon-nequi">
-          Pagar con Nequi
-        </button>
-        <p>Número: <strong>3136521860</strong></p>
-        <img src="img/nequi-qr.png" alt="QR Nequi" class="qr-nequi">
-      </div>
+      <a href="https://wa.me/573136521860?text=Hola,%20quiero%20pagar%20con%20Nequi%20mi%20currículum" target="_blank">
+        <button class="btn-nequi">Pagar con Nequi</button>
+      </a>
+
+      <p>Una vez confirmado el pago, recibirás tu CV sin marca de agua por correo o WhatsApp.</p>
     </div>
   </div>
 

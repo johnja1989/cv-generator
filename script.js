@@ -1,7 +1,6 @@
 document.getElementById("form-cv").addEventListener("submit", function (e) {
   e.preventDefault();
 
-  // Obtener valores de los campos
   const nombre = document.getElementById("nombre").value;
   const correo = document.getElementById("correo").value;
   const profesion = document.getElementById("profesion").value;
@@ -10,7 +9,6 @@ document.getElementById("form-cv").addEventListener("submit", function (e) {
   const educacion = document.getElementById("educacion").value;
   const linkedin = document.getElementById("linkedin").value;
 
-  // Crear contenedor HTML para el currículum
   const contenido = document.createElement("div");
   contenido.style.padding = "30px";
   contenido.innerHTML = `
@@ -26,23 +24,22 @@ document.getElementById("form-cv").addEventListener("submit", function (e) {
     <p><strong>LinkedIn:</strong> <a href="${linkedin}" target="_blank">${linkedin}</a></p>
   `;
 
-  // Crear marca de agua diagonal
+  // Marca de agua diagonal
   const watermarkCanvas = document.createElement("canvas");
   watermarkCanvas.width = 400;
   watermarkCanvas.height = 400;
   const ctx = watermarkCanvas.getContext("2d");
   ctx.translate(watermarkCanvas.width / 2, watermarkCanvas.height / 2);
-  ctx.rotate(-Math.PI / 4); // rotar 45 grados en sentido antihorario
+  ctx.rotate(-Math.PI / 4);
   ctx.font = "30px Arial";
   ctx.fillStyle = "rgba(150, 150, 150, 0.2)";
   ctx.textAlign = "center";
   ctx.fillText("CV GENERADO GRATIS", 0, 0);
-
   const watermarkDataURL = watermarkCanvas.toDataURL("image/png");
+
   contenido.style.backgroundImage = `url(${watermarkDataURL})`;
   contenido.style.backgroundRepeat = "repeat";
 
-  // Configurar y generar PDF
   const opciones = {
     margin: 0,
     filename: "cv_generado.pdf",

@@ -1,68 +1,42 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  background: #f4f4f4;
   margin: 0;
   padding: 0;
 }
 
 .contenedor {
   max-width: 600px;
-  margin: 40px auto;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin: auto;
+  background: #fff;
+  padding: 2em;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1, h2 {
-  text-align: center;
-}
-
-form input, form textarea {
+input, textarea {
   width: 100%;
-  margin-bottom: 10px;
   padding: 10px;
+  margin-bottom: 1em;
   border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px 20px;
+  margin-bottom: 1em;
+  border: none;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 button[type="submit"] {
-  width: 100%;
-  background-color: #4CAF50;
+  background: #007bff;
   color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.seccion-premium {
-  margin-top: 30px;
-  text-align: center;
-}
-
-.btn-wsp,
-.btn-pago,
-.btn-nequi {
-  margin: 10px 0;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  font-size: 15px;
-  cursor: pointer;
-  width: 100%;
 }
 
 .btn-wsp {
   background-color: #25D366;
   color: white;
-}
-
-.icon-wsp {
-  height: 20px;
-  margin-right: 8px;
-  vertical-align: middle;
 }
 
 .btn-pago {
@@ -71,28 +45,11 @@ button[type="submit"] {
 }
 
 .btn-nequi {
-  background-color: #4B0082;
+  background-color: #7300a6;
   color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.icon-paypal {
-  height: 20px;
-  margin-right: 8px;
-  vertical-align: middle;
-}
-
-.icon-nequi {
-  height: 20px;
-  margin-right: 8px;
-  vertical-align: middle;
-}
-
-.qr-nequi {
-  margin-top: 10px;
-  width: 150px;
-  height: auto;
-  border-radius: 10px;
+.seccion-premium {
+  margin-top: 2em;
+  text-align: center;
 }
