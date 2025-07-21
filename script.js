@@ -50,7 +50,7 @@ document.getElementById("form-cv").addEventListener("submit", async function (e)
     // Repetir patrón diagonal
     for (let x = -50; x < width + 100; x += 80) {
       for (let y = -50; y < height + 100; y += 60) {
-        doc.text("Marca de Agua", x, y, {
+        doc.text("Made with CV-GENERATOR", x, y, {
           angle: 45
         });
       }
